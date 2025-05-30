@@ -1,4 +1,6 @@
 import FadeInSection from "./FadeInSection";
+import { products } from "../lib/products";
+import ProductCard from "./ProductCard";
 
 export default function ProductGrid() {
   return (
@@ -11,6 +13,11 @@ export default function ProductGrid() {
         </FadeInSection>
 
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product, i) => (
+            <FadeInSection key={product.id} delay={i * 0.1}>
+              <ProductCard product={product} />
+            </FadeInSection>
+          ))}
         </div>
       </div>
     </section>
