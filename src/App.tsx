@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import ProductGrid from "./components/ProductGrid";
 import ContactForm from "./components/ContactForm";
 import Loader from "./components/Loader";
+import ProductPage from "./components/ProductPage";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,14 @@ export default function App() {
               <Hero />
               <ProductGrid />
               <ContactForm />
+            </Layout>
+          }
+        />
+        <Route
+          path="/product/:slug"
+          element={
+            <Layout>
+              <ProductPage />
             </Layout>
           }
         />
