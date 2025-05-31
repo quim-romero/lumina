@@ -8,6 +8,7 @@ import ProductGrid from "./components/ProductGrid";
 import ContactForm from "./components/ContactForm";
 import Loader from "./components/Loader";
 import ProductPage from "./components/ProductPage";
+import CartPage from "./pages/CartPage";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,6 +41,14 @@ export default function App() {
           element={
             <Layout>
               <ProductPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <Layout>
+              <CartPage />
             </Layout>
           }
         />
