@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { products } from "../lib/products";
+import { motion } from "framer-motion";
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -14,7 +15,13 @@ export default function ProductPage() {
   }
 
   return (
-    <section className="container py-20">
+    <motion.section
+      className="container py-20"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="grid md:grid-cols-2 gap-12">
         <img
           src={product.image}
@@ -28,6 +35,6 @@ export default function ProductPage() {
           <p className="text-2xl font-semibold text-brand">${product.price}</p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
