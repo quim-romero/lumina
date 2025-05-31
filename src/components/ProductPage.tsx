@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { products } from "../lib/products";
 import { motion } from "framer-motion";
 
 export default function ProductPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const product = products.find((p) => p.slug === slug);
 
   if (!product) {
@@ -33,6 +34,19 @@ export default function ProductPage() {
           <h1 className="text-4xl font-display font-bold">{product.name}</h1>
           <p className="text-muted text-lg">{product.description}</p>
           <p className="text-2xl font-semibold text-brand">${product.price}</p>
+
+          <div className="flex gap-4 mt-4">
+            <button className="px-6 py-3 rounded-full bg-brand text-white font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2">
+              Buy now
+            </button>
+
+            <button
+              onClick={() => navigate(-1)}
+              className="px-6 py-3 rounded-full border border-muted hover:bg-muted/10 transition focus:outline-none focus-visible:ring-2 ring-muted ring-offset-2"
+            >
+              Back
+            </button>
+          </div>
         </div>
       </div>
     </motion.section>
