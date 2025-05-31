@@ -1,11 +1,25 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { products } from "../lib/products";
 import { motion } from "framer-motion";
+import { useCartStore } from "../store/useCartStore";
 
 export default function ProductPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const product = products.find((p) => p.slug === slug);
+
+  const addItem = useCartStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      stripePriceId: product.stripePriceId,
+    });
+    navigate("/cart");
+  };
 
   if (!product) {
     return (
@@ -36,7 +50,10 @@ export default function ProductPage() {
           <p className="text-2xl font-semibold text-brand">${product.price}</p>
 
           <div className="flex gap-4 mt-4">
-            <button className="px-6 py-3 rounded-full bg-brand text-white font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2">
+            <button
+              onClick={handleAddToCart}
+              className="px-6 py-3 rounded-full bg-brand text-white font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+            >
               Buy now
             </button>
 
