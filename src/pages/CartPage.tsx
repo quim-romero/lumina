@@ -59,14 +59,17 @@ export default function CartPage() {
             </div>
           ))}
 
-          <div className="flex justify-between items-center mt-8">
-            <p className="text-xl font-semibold">Total: ${total.toFixed(2)}</p>
+          <div className="flex justify-between items-center mt-6">
             <button
               onClick={clearCart}
-              className="text-sm text-red-500 hover:underline"
+              className="text-sm text-muted hover:underline"
             >
-              Clear Cart
+              Clear cart
             </button>
+
+            <div className="text-xl font-semibold">
+              Total: <span className="text-brand">${total.toFixed(2)}</span>
+            </div>
           </div>
 
           <Link
