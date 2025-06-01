@@ -72,12 +72,17 @@ export default function CartPage() {
             </div>
           </div>
 
-          <Link
-            to="/checkout"
-            className="mt-4 inline-block bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-          >
-            Proceed to Checkout
-          </Link>
+          <div className="mt-8">
+            <button className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition">
+              Proceed to Checkout
+            </button>
+          </div>
+
+          <div className="mt-4">
+            <Link to="/" className="text-sm text-brand hover:underline">
+              Continue Shopping
+            </Link>
+          </div>
         </div>
       )}
     </section>
