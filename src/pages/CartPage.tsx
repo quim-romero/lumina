@@ -1,16 +1,23 @@
 import { useCartStore } from "../store/useCartStore";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function CartPage() {
   const { items, removeItem, increase, decrease, clearCart } = useCartStore();
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0,
+    0
   );
 
   return (
-    <section className="container py-20">
+    <motion.section
+      className="container py-20"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
       <h1 className="text-3xl font-display font-bold mb-8">Your Cart</h1>
 
       {items.length === 0 ? (
@@ -73,7 +80,9 @@ export default function CartPage() {
           </div>
 
           <div className="mt-8">
-            <button className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition">
+            <button
+              className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition"
+            >
               Proceed to Checkout
             </button>
           </div>
@@ -85,6 +94,6 @@ export default function CartPage() {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
