@@ -1,14 +1,26 @@
 import { useCartStore } from "../store/useCartStore";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { redirectToCheckout } from "../lib/checkout";
 
 export default function CartPage() {
   const { items, removeItem, increase, decrease, clearCart } = useCartStore();
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
+
+  const handleCheckout = () => {
+    if (items.length > 0) {
+      redirectToCheckout(
+        items.map((item) => ({
+          stripePriceId: item.stripePriceId,
+          quantity: item.quantity,
+        })),
+      );
+    }
+  };
 
   return (
     <motion.section
@@ -81,6 +93,7 @@ export default function CartPage() {
 
           <div className="mt-8">
             <button
+              onClick={handleCheckout}
               className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition"
             >
               Proceed to Checkout
