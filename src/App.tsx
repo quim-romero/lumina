@@ -10,6 +10,9 @@ import Loader from "./components/Loader";
 import ProductPage from "./components/ProductPage";
 import CartPage from "./pages/CartPage";
 
+import SuccessPage from "./pages/SuccessPage";
+import CancelPage from "./pages/CancelPage";
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -49,6 +52,22 @@ export default function App() {
           element={
             <Layout>
               <CartPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/success"
+          element={
+            <Layout>
+              <SuccessPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cancel"
+          element={
+            <Layout>
+              <CancelPage />
             </Layout>
           }
         />
