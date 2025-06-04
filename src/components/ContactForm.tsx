@@ -1,8 +1,14 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import emailjs from "@emailjs/browser";
 import { contactSchema } from "../lib/contactSchema";
 import type { ContactFormData } from "../lib/contactSchema";
 import { useState } from "react";
+import { motion } from "framer-motion";
+
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 export default function ContactForm() {
   const {
@@ -17,17 +23,113 @@ export default function ContactForm() {
   const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data: ContactFormData) => {
-    console.log(data);
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS environment variables are missing.");
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          reply_to: data.email,
+          message: data.message,
+        },
+        publicKey
+      );
+      setSuccess(true);
+      reset();
+    } catch (error) {
+      console.error("Email send failed", error);
+      setSuccess(false);
+    }
   };
 
   return (
     <section className="py-24 bg-surface dark:bg-zinc-900" id="contact">
       <div className="container max-w-2xl">
-        <h2 className="text-3xl font-display font-bold mb-8 text-center">
+        <motion.h2
+          className="text-3xl font-display font-bold mb-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           Let’s Connect
-        </h2>
+        </motion.h2>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6 bg-white dark:bg-dark p-8 rounded-2xl shadow-xl"
           noValidate
         >
+          <div>
+            <label htmlFor="name" className="block font-medium mb-1">
+              Name
+            </label>
+            <input
+              id="name"
+              {...register("name")}
+              className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+              autoComplete="name"
+            />
+            {errors.name && (
+              <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block font-medium mb-1">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              {...register("email")}
+              className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+              autoComplete="email"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block font-medium mb-1">
+              Message
+            </label>
+            <textarea
+              id="message"
+              rows={5}
+              {...register("message")}
+              className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+            />
+            {errors.message && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.message.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Sending..." : "Send message"}
+          </button>
+
+          {success && (
+            <p className="text-green-600 font-medium mt-4">
+              Your message was sent successfully!
+            </p>
+          )}
+        </form>
+      </div>
+    </section>
+  );
+}
