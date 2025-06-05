@@ -22,11 +22,17 @@ export default function App() {
   useScrollTop();
 
   useEffect(() => {
+    if (location.pathname === "/cancel") {
+      setIsLoading(false);
+      return;
+    }
+
     const timeout = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+
     return () => clearTimeout(timeout);
-  }, []);
+  }, [location.pathname]);
 
   if (isLoading) return <Loader />;
 
