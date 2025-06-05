@@ -23,7 +23,8 @@ export default function Navbar() {
       <div className="container flex justify-between items-center">
         <Link
           to="/"
-          className="font-display text-xl font-bold tracking-wide hover:opacity-80 transition"
+          aria-label="Home"
+          className="font-display text-xl font-bold tracking-wide hover:opacity-80 focus:opacity-80 transition"
         >
           LUMINA
         </Link>
