@@ -7,7 +7,7 @@ import Hero from "./components/Hero";
 import ProductGrid from "./components/ProductGrid";
 import ContactForm from "./components/ContactForm";
 import Loader from "./components/Loader";
-import ProductPage from "./components/ProductPage";
+import ProductPage from "./pages/ProductPage";
 
 import CartPage from "./pages/CartPage";
 import SuccessPage from "./pages/SuccessPage";
