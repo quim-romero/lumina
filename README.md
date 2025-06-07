@@ -1,69 +1,110 @@
-# React + TypeScript + Vite
+# LUMINA — Premium Digital Goods with Soul
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> _Crafted interfaces. Real UX. Digital products that feel alive._
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧭 About LUMINA
 
-## Expanding the ESLint configuration
+**LUMINA** is more than a landing page — it’s a fully functional **e-commerce experience** for digital products, built as if launching tomorrow.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Designed with precision, care, and clarity in mind, it features:
+- 🎨 Immersive hero with motion and scroll-based animations
+- 🛍️ Interactive product grid with hover effects and route transitions
+- 💳 Functional Stripe Checkout (test mode)
+- ✉️ Contact form with real-time validation and EmailJS integration
+- 🌗 Light/dark mode with system preference + persistence
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+> Built to showcase real frontend capabilities — not mockups.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Live Preview
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+👉 [https://lumina.quimromero.com](https://lumina.quimromero.com)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ✨ Features
+
+- ⚡ Scroll-based animations using Framer Motion
+- 🎯 Fully responsive layout with keyboard accessibility
+- 🛍️ Product detail routes with animated transitions
+- 💸 Stripe Checkout (test mode, frontend-only)
+- 📩 Validated contact form with Zod + EmailJS
+- 🌓 Dark/light mode toggle with smooth transitions
+- 🧼 Clean, scalable architecture built with intention
+- 🎬 Page transitions, fade-ins, button feedback, and loader screen
+
+---
+
+## 🧠 Tech Stack
+
+| Tech                     | Role                              |
+|--------------------------|-----------------------------------|
+| **React + TypeScript**   | Core framework                    |
+| **Vite**                 | Build tool                        |
+| **Tailwind CSS**         | Utility-first design system       |
+| **Framer Motion**        | Animations + transitions          |
+| **GSAP**                 | Scroll-based effects (planned)    |
+| **Zustand**              | State management (optional scope) |
+| **React Hook Form + Zod**| Form logic + validation           |
+| **EmailJS**              | Contact form email integration    |
+| **Stripe.js**            | Payment checkout (test mode)      |
+| **React Router DOM**     | Page routing                      |
+
+---
+
+## 🗂 Project Structure
+
+- `src/`
+  - `components/` – UI blocks (Navbar, Hero, ProductCard, etc.)
+  - `hooks/` – Custom hooks (smooth scroll, scroll-top reset)
+  - `lib/` – Product data, validation schemas, checkout utils
+  - `styles/` – Global Tailwind CSS config
+  - `assets/` – Mock product images
+  - `App.tsx` – Main routes + layout composition
+- `public/` – HTML entry point, fonts, favicon
+- `.env` – (optional) Stripe + EmailJS keys
+
+---
+
+## 🧪 Interactions & Motion
+
+LUMINA focuses on **interface quality**, not just code:
+- 🌀 Smooth scroll with scroll-triggered reveal animations
+- 🔄 Hero section and products fade in naturally
+- ⚡ Microinteractions on buttons, hovers, and route transitions
+- ⌨️ Focus-visible states and keyboard-friendly navigation
+- 📱 Fully responsive with mobile-first layout
+
+---
+
+## 📸 Screenshots
+
+| Hero | Products | Product Detail |
+|------|----------|----------------|
+| ![Hero](./screenshots/hero.png) | ![Grid](./screenshots/grid.png) | ![Detail](./screenshots/detail.png) |
+
+---
+
+## 🧩 Notes
+
+- 🧠 All code is handcrafted — no UI kits, no templates
+- 🔍 Typography and motion tuned for clarity and presence
+- 💡 Uses real data flow, payment redirect, and form validation
+- 🎯 Built as a **freelance portfolio project**, ready for presentation
+
+---
+
+## 📬 Contact
+
+Looking to hire a frontend developer who builds **real product experiences** with precision?
+
+- 📧 quim@quimromero.com  
+- 🌐 [https://quimromero.com](https://quimromero.com)
+
+---
+
+> _LUMINA is frontend done with soul —  
+> built for users who feel design, not just see it._
