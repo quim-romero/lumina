@@ -33,6 +33,10 @@ coverage/
 cypress/videos/
 cypress/screenshots/
 
+# Lighthouse CI
+.lighthouseci/
+lhci/
+
 # TypeScript
 *.tsbuildinfo
 

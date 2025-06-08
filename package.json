@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "vite preview --port 4173 --strictPort",
     "cy:run": "cypress run --browser chrome --headless",
     "test:e2e": "start-server-and-test dev http://localhost:5173 cy:run",
-    "e2e": "npm run test:e2e"
+    "e2e": "npm run test:e2e",
+    "lh:report": "lhci autorun"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -31,6 +32,8 @@
   "devDependencies": {
     "@axe-core/webdriverjs": "^4.10.2",
     "@eslint/js": "^9.32.0",
+    "@lhci/cli": "^0.15.1",
+    "@types/axe-core": "^2.0.2",
     "@types/node": "^24.2.0",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
