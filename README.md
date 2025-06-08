@@ -1,5 +1,7 @@
 # LUMINA — Premium Digital Goods with Soul
 
+![E2E Tests](https://github.com/quim-romero/lumina/actions/workflows/ci.yml/badge.svg)
+
 > _Crafted interfaces. Real UX. Digital products that feel alive._
 
 ---

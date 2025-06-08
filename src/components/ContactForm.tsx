@@ -37,7 +37,7 @@ export default function ContactForm() {
           reply_to: data.email,
           message: data.message,
         },
-        publicKey
+        publicKey,
       );
       setSuccess(true);
       reset();
@@ -61,6 +61,7 @@ export default function ContactForm() {
         </motion.h2>
 
         <form
+          data-testid="contact-form"
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6 bg-white dark:bg-dark p-8 rounded-2xl shadow-xl"
           noValidate
@@ -76,7 +77,13 @@ export default function ContactForm() {
               autoComplete="name"
             />
             {errors.name && (
-              <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+              <p
+                className="text-sm text-red-500 mt-1"
+                role="alert"
+                data-testid="contact-error"
+              >
+                {errors.name.message}
+              </p>
             )}
           </div>
 
@@ -92,7 +99,11 @@ export default function ContactForm() {
               autoComplete="email"
             />
             {errors.email && (
-              <p className="text-sm text-red-500 mt-1">
+              <p
+                className="text-sm text-red-500 mt-1"
+                role="alert"
+                data-testid="contact-error"
+              >
                 {errors.email.message}
               </p>
             )}
@@ -109,7 +120,11 @@ export default function ContactForm() {
               className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
             />
             {errors.message && (
-              <p className="text-sm text-red-500 mt-1">
+              <p
+                className="text-sm text-red-500 mt-1"
+                role="alert"
+                data-testid="contact-error"
+              >
                 {errors.message.message}
               </p>
             )}
@@ -118,6 +133,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
+            data-testid="contact-submit"
             className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Sending..." : "Send message"}
