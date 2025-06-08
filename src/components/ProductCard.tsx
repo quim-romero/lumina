@@ -17,6 +17,8 @@ export default function ProductCard({ product }: Props) {
         src={product.image}
         alt={product.name}
         className="w-full h-48 object-cover"
+        loading="lazy"
+        decoding="async"
       />
 
       <div className="p-4 flex flex-col gap-2">

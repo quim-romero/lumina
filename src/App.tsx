@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -7,7 +7,8 @@ import Hero from "./components/Hero";
 import ProductGrid from "./components/ProductGrid";
 import ContactForm from "./components/ContactForm";
 import Loader from "./components/Loader";
-import ProductPage from "./pages/ProductPage";
+
+const ProductPage = lazy(() => import("./pages/ProductPage"));
 
 import CartPage from "./pages/CartPage";
 import SuccessPage from "./pages/SuccessPage";
@@ -50,14 +51,20 @@ export default function App() {
               </Layout>
             }
           />
+
           <Route
             path="/product/:slug"
             element={
               <Layout>
-                <ProductPage />
+                <Suspense
+                  fallback={<div className="container py-20">Loading…</div>}
+                >
+                  <ProductPage />
+                </Suspense>
               </Layout>
             }
           />
+
           <Route
             path="/success"
             element={
