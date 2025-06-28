@@ -20,6 +20,7 @@ const config: Config = {
       colors: {
         brand: "#EAB308",
         "brand-dark": "#CA8A04",
+        "brand-700": "#B45309",
         background: "#F9F5EC",
         surface: "#FFFDF5",
         muted: "#78716C",
