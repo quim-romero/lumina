@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 
 import Layout from "./components/Layout";
 import Hero from "./components/Hero";
@@ -38,7 +38,7 @@ export default function App() {
   if (isLoading) return <Loader />;
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route
@@ -91,6 +91,6 @@ export default function App() {
           />
         </Routes>
       </AnimatePresence>
-    </>
+    </MotionConfig>
   );
 }
