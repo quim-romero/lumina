@@ -25,12 +25,16 @@ export default function CartPage() {
   return (
     <motion.section
       className="container py-20"
+      role="main"
+      aria-labelledby="cart-title"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="text-3xl font-display font-bold mb-8">Your Cart</h1>
+      <h1 id="cart-title" className="text-3xl font-display font-bold mb-8">
+        Your Cart
+      </h1>
 
       {items.length === 0 ? (
         <p className="text-muted">Your cart is empty.</p>
@@ -46,6 +50,8 @@ export default function CartPage() {
                   src={item.image}
                   alt={item.name}
                   className="w-16 h-16 rounded object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <h2 className="font-medium">{item.name}</h2>
@@ -54,23 +60,31 @@ export default function CartPage() {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => decrease(item.id)}
-                  className="px-2 py-1 border rounded"
+                  className="px-3 py-2 border rounded focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+                  aria-label={`Decrease quantity of ${item.name}`}
                 >
-                  -
+                  <span aria-hidden>−</span>
                 </button>
-                <span>{item.quantity}</span>
+
+                <span className="min-w-6 text-center" aria-live="polite">
+                  {item.quantity}
+                </span>
+
                 <button
                   onClick={() => increase(item.id)}
-                  className="px-2 py-1 border rounded"
+                  className="px-3 py-2 border rounded focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+                  aria-label={`Increase quantity of ${item.name}`}
                 >
-                  +
+                  <span aria-hidden>＋</span>
                 </button>
+
                 <button
                   onClick={() => removeItem(item.id)}
-                  className="text-sm text-red-500 hover:underline ml-4"
+                  className="text-sm text-red-700 underline ml-4 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded"
                 >
                   Remove
                 </button>
@@ -81,27 +95,34 @@ export default function CartPage() {
           <div className="flex justify-between items-center mt-6">
             <button
               onClick={clearCart}
-              className="text-sm text-muted hover:underline"
+              className="text-sm text-muted underline focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded"
             >
               Clear cart
             </button>
 
             <div className="text-xl font-semibold">
-              Total: <span className="text-brand">${total.toFixed(2)}</span>
+              Total:{" "}
+              <span className="inline-flex items-center rounded-full bg-brand px-3 py-1 text-dark">
+                ${total.toFixed(2)}
+              </span>
             </div>
           </div>
 
           <div className="mt-8">
             <button
               onClick={handleCheckout}
-              className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition"
+              className="px-6 py-3 bg-brand text-dark rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
             >
               Proceed to Checkout
             </button>
           </div>
 
           <div className="mt-4">
-            <Link to="/" className="text-sm text-brand hover:underline">
+            <Link
+              to="/"
+              className="text-sm underline focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded"
+              aria-label="Continue shopping on the home page"
+            >
               Continue Shopping
             </Link>
           </div>
