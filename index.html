@@ -1,21 +1,89 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="color-scheme" content="light dark" />
+
+    <meta
+      name="theme-color"
+      content="#F9F5EC"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1C1917"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <meta name="description" content="Lumina — tienda de productos digitales" />
+    <meta name="robots" content="index,follow" />
+
+    <title>Lumina</title>
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Unbounded:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap"
       rel="stylesheet"
     />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          root.classList.remove("no-js");
+          root.classList.add("js");
+
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          var isDark = stored ? stored === "dark" : prefersDark;
+
+          root.classList.toggle("dark", isDark);
+          root.style.colorScheme = isDark ? "dark" : "light";
+        } catch (e) {}
+      })();
+    </script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        padding: 0.75rem 1rem;
+        background: #eab308;
+        color: #1c1917;
+        border-radius: 0.5rem;
+        z-index: 10000;
+      }
+      .skip-link:focus {
+        left: 0.75rem;
+        top: 0.75rem;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.6);
+      }
+    </style>
   </head>
-  <body>
+
+  <body class="bg-light text-dark dark:bg-dark dark:text-light antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <div id="root"></div>
+
+    <noscript>
+      <div style="padding: 1rem; text-align: center">
+        This application requires JavaScript to work properly.
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
