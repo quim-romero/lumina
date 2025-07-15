@@ -6,6 +6,18 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   @apply bg-light text-dark dark:bg-dark dark:text-light antialiased;
   font-family: "Inter", sans-serif;
@@ -20,7 +32,14 @@ h3,
 
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px theme("colors.brand") inset;
+  box-shadow: 0 0 0 2px #eab308 inset;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.6);
+  border-radius: 6px;
 }
 
 img {
@@ -31,7 +50,11 @@ img {
 
 button,
 a {
-  transition: all 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 p a,
@@ -42,9 +65,14 @@ li a,
   text-decoration-thickness: 2px;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px theme("colors.brand") / 0.6;
-  border-radius: 6px;
+@layer utilities {
+  :root {
+    --muted-rgb: 75 85 99;
+  }
+  .dark {
+    --muted-rgb: 209 213 219;
+  }
+  .text-muted {
+    color: rgb(var(--muted-rgb));
+  }
 }

@@ -7,8 +7,12 @@ type Props = {
 };
 
 export default function ProductCard({ product }: Props) {
+  const titleId = `product-${product.id}-title`;
+
   return (
     <motion.div
+      role="article"
+      aria-labelledby={titleId}
       className="bg-surface dark:bg-zinc-900 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
       whileHover={{ scale: 1.015 }}
       whileTap={{ scale: 0.98 }}
@@ -22,15 +26,26 @@ export default function ProductCard({ product }: Props) {
       />
 
       <div className="p-4 flex flex-col gap-2">
-        <h3 className="font-display text-lg font-semibold">{product.name}</h3>
+        <h3
+          id={titleId}
+          className="font-display text-lg font-semibold text-dark dark:text-light"
+        >
+          {product.name}
+        </h3>
+
         <p className="text-sm text-muted">{product.description}</p>
+
         <div className="mt-2 flex justify-between items-center">
-          <span className="text-brand font-semibold">${product.price}</span>
+          <span className="inline-flex items-center rounded-full bg-brand px-2.5 py-0.5 text-dark font-semibold">
+            ${product.price}
+          </span>
+
           <Link
             to={`/product/${product.slug}`}
-            className="text-sm font-medium underline text-brand hover:text-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded-sm"
+            className="text-sm font-medium underline text-dark hover:opacity-80 transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded-sm"
+            aria-label={`See more details about ${product.name}`}
           >
-            See more
+            See more<span className="sr-only"> about {product.name}</span>
           </Link>
         </div>
       </div>
