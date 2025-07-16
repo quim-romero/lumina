@@ -8,6 +8,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ duration: 2 }}
+        aria-hidden
       />
 
       <motion.h1
@@ -17,7 +18,9 @@ export default function Hero() {
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         Everyday Products <br /> built with{" "}
-        <span className="text-brand">Design</span>
+        <span className="underline decoration-brand decoration-4 underline-offset-4">
+          Design
+        </span>
       </motion.h1>
 
       <motion.p
@@ -31,7 +34,7 @@ export default function Hero() {
 
       <motion.a
         href="#products"
-        className="mt-10 z-10 px-6 py-3 text-sm font-semibold tracking-wide uppercase bg-brand text-white rounded-full hover:bg-brand-dark transition"
+        className="mt-10 z-10 px-6 py-3 text-sm font-semibold tracking-wide uppercase bg-brand text-dark rounded-full hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.8, duration: 0.6 }}
