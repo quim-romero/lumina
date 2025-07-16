@@ -21,10 +21,15 @@ export default function ContactForm() {
   });
 
   const [success, setSuccess] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   const onSubmit = async (data: ContactFormData) => {
+    setSuccess(false);
+    setSendError(null);
+
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS environment variables are missing.");
+      setSendError("Configuration error. Please try again later.");
       return;
     }
 
@@ -43,6 +48,7 @@ export default function ContactForm() {
       reset();
     } catch (error) {
       console.error("Email send failed", error);
+      setSendError("We couldn’t send your message. Please try again.");
       setSuccess(false);
     }
   };
@@ -65,6 +71,14 @@ export default function ContactForm() {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6 bg-white dark:bg-dark p-8 rounded-2xl shadow-xl"
           noValidate
+          aria-describedby={
+            sendError
+              ? "contact-submit-error"
+              : success
+                ? "contact-submit-success"
+                : undefined
+          }
+          aria-busy={isSubmitting}
         >
           <div>
             <label htmlFor="name" className="block font-medium mb-1">
@@ -75,10 +89,13 @@ export default function ContactForm() {
               {...register("name")}
               className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
               autoComplete="name"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? "name-error" : undefined}
             />
             {errors.name && (
               <p
-                className="text-sm text-red-500 mt-1"
+                id="name-error"
+                className="text-sm text-red-600 mt-1"
                 role="alert"
                 data-testid="contact-error"
               >
@@ -97,10 +114,13 @@ export default function ContactForm() {
               {...register("email")}
               className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
               autoComplete="email"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
             />
             {errors.email && (
               <p
-                className="text-sm text-red-500 mt-1"
+                id="email-error"
+                className="text-sm text-red-600 mt-1"
                 role="alert"
                 data-testid="contact-error"
               >
@@ -118,10 +138,13 @@ export default function ContactForm() {
               rows={5}
               {...register("message")}
               className="w-full px-4 py-2 border border-border rounded-md bg-light dark:bg-zinc-800 focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? "message-error" : undefined}
             />
             {errors.message && (
               <p
-                className="text-sm text-red-500 mt-1"
+                id="message-error"
+                className="text-sm text-red-600 mt-1"
                 role="alert"
                 data-testid="contact-error"
               >
@@ -133,15 +156,30 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
+            aria-disabled={isSubmitting}
             data-testid="contact-submit"
-            className="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-brand text-dark rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Sending..." : "Send message"}
           </button>
 
           {success && (
-            <p className="text-green-600 font-medium mt-4">
+            <p
+              id="contact-submit-success"
+              className="text-green-600 font-medium mt-4"
+              role="status"
+              aria-live="polite"
+            >
               Your message was sent successfully!
+            </p>
+          )}
+          {sendError && (
+            <p
+              id="contact-submit-error"
+              className="text-red-600 font-medium mt-4"
+              role="alert"
+            >
+              {sendError}
             </p>
           )}
         </form>
