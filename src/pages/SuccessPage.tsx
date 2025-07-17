@@ -29,7 +29,7 @@ export default function SuccessPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        Your purchase was successful. You'll receive your download link shortly.
+        Your purchase was successful. You’ll receive your download link shortly.
       </motion.p>
 
       <motion.div

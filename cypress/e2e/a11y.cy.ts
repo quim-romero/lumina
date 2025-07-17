@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
+import type { Result } from "axe-core";
 
-function failIfViolations(violations: any[]) {
+function failIfViolations(violations: Result[]) {
   if (violations.length) {
     const summary = violations
       .map((v) => `• ${v.id} (${v.impact}) - ${v.nodes.length} nodes`)
@@ -12,6 +13,7 @@ function failIfViolations(violations: any[]) {
 describe("A11y checks (critical/serious)", () => {
   it("Home", () => {
     cy.visit("/");
+    cy.get("main", { timeout: 10000 }).should("be.visible");
     cy.injectAxe();
     cy.checkA11y(
       undefined,

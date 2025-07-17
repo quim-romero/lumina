@@ -1,8 +1,8 @@
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   plugins: [
     react(),
     process.env.ANALYZE
@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
           template: "treemap",
           gzipSize: true,
           brotliSize: true,
-        }) as any)
+        }) as PluginOption)
       : undefined,
-  ].filter(Boolean),
+  ].filter(Boolean) as PluginOption[],
 }));

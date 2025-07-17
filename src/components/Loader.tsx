@@ -26,7 +26,7 @@ export default function Loader() {
       transition={{ duration: 1, delay: 1 }}
     >
       <motion.h1
-        className="text-3xl font-display font-bold text-brand"
+        className="text-3xl font-display font-bold text-brand-700 dark:text-brand"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1 }}

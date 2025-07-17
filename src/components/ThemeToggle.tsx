@@ -6,7 +6,7 @@ type Theme = "light" | "dark";
 function applyTheme(t: Theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", t === "dark");
-  (root.style as any).colorScheme = t;
+  root.style.setProperty("color-scheme", t);
 }
 
 export default function ThemeToggle() {

@@ -1,4 +1,7 @@
 import type { Config } from "tailwindcss";
+import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
@@ -7,10 +10,7 @@ const config: Config = {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: {
-        "2xl": "1280px",
-        "3xl": "1600px",
-      },
+      screens: { "2xl": "1280px", "3xl": "1600px" },
     },
     extend: {
       fontFamily: {
@@ -26,15 +26,11 @@ const config: Config = {
         muted: "#78716C",
         dark: "#1C1917",
         light: "#FFFBEB",
-        accent: "#A3E635",
+        border: "#E7E5E4",
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("tailwindcss-animate"),
-  ],
+  plugins: [forms, typography, animate],
 };
 
 export default config;

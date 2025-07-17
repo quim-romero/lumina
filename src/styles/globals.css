@@ -5,7 +5,6 @@
 html {
   scroll-behavior: smooth;
 }
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -22,7 +21,6 @@ body {
   @apply bg-light text-dark dark:bg-dark dark:text-light antialiased;
   font-family: "Inter", sans-serif;
 }
-
 h1,
 h2,
 h3,
@@ -30,49 +28,8 @@ h3,
   font-family: "Unbounded", cursive;
 }
 
-:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #eab308 inset;
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.6);
-  border-radius: 6px;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-button,
-a {
-  transition:
-    transform 0.2s ease-in-out,
-    opacity 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-}
-
-p a,
-li a,
-.prose a {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 2px;
-}
-
-@layer utilities {
-  :root {
-    --muted-rgb: 75 85 99;
-  }
-  .dark {
-    --muted-rgb: 209 213 219;
-  }
-  .text-muted {
-    color: rgb(var(--muted-rgb));
+@layer base {
+  * {
+    @apply border-border;
   }
 }
