@@ -42,8 +42,16 @@ export default function ProductCard({ product }: Props) {
 
           <Link
             to={`/product/${product.slug}`}
-            className="text-sm font-medium underline text-dark hover:opacity-80 transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 rounded-sm"
             aria-label={`See more details about ${product.name}`}
+            className={[
+              "inline-block rounded-sm px-1",
+              "bg-surface dark:bg-zinc-900",
+              "text-sm font-medium underline decoration-2 underline-offset-4",
+              "text-dark visited:text-dark dark:text-light dark:visited:text-light",
+              "hover:text-brand-700 dark:hover:text-brand",
+              "focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2 ring-offset-surface dark:ring-offset-zinc-900",
+              "transition",
+            ].join(" ")}
           >
             See more<span className="sr-only"> about {product.name}</span>
           </Link>

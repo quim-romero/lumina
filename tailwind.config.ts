@@ -23,7 +23,7 @@ const config: Config = {
         "brand-700": "#B45309",
         background: "#F9F5EC",
         surface: "#FFFDF5",
-        muted: "#78716C",
+        muted: "hsl(var(--muted) / <alpha-value>)",
         dark: "#1C1917",
         light: "#FFFBEB",
         border: "#E7E5E4",

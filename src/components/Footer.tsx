@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="bg-light dark:bg-dark border-t border-muted/30 dark:border-muted/50 py-12 text-sm text-muted dark:text-muted/80 transition-colors"
+      className="bg-light dark:bg-dark border-t border-muted/30 dark:border-muted/50 py-12 text-sm text-muted/80 transition-colors"
     >
       <div className="container grid md:grid-cols-3 gap-8 items-start">
         <div>

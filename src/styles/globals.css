@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------ Movement preferences ------------------ */
 html {
   scroll-behavior: smooth;
 }
@@ -17,8 +18,9 @@ html {
   }
 }
 
+/* ------------------ Fonts and base ------------------ */
 body {
-  @apply bg-light text-dark dark:bg-dark dark:text-light antialiased;
+  @apply antialiased bg-light text-dark dark:bg-dark dark:text-light;
   font-family: "Inter", sans-serif;
 }
 h1,
@@ -28,8 +30,58 @@ h3,
   font-family: "Unbounded", cursive;
 }
 
+/* --------------- Tokens with theme support --------------- */
 @layer base {
+  :root {
+    --muted: 24 6% 45%;
+    --brand-fg: 24 95% 35%;
+  }
+  .dark {
+    --muted: 0 0% 78%;
+    --brand-fg: 48 96% 53%;
+  }
+
   * {
     @apply border-border;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--muted)) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* --------------- Minimum contrast utilities --------------- */
+@layer utilities {
+  .text-brand {
+    color: hsl(var(--brand-fg)) !important;
+  }
+  .dark .text-brand {
+    color: #eab308 !important;
+  }
+  .bg-brand,
+  .bg-brand-dark {
+    color: #1c1917 !important;
+  }
+  .bg-brand :is(.text-white, .text-light),
+  .bg-brand-dark :is(.text-white, .text-light) {
+    color: #1c1917 !important;
+  }
+  .bg-brand svg,
+  .bg-brand-dark svg {
+    fill: #1c1917 !important;
+    stroke: #1c1917 !important;
+  }
+  .badge-brand,
+  .chip-brand {
+    @apply bg-brand;
+    color: #1c1917 !important;
+  }
+  .link-muted {
+    @apply underline decoration-current underline-offset-4 text-muted hover:text-dark dark:hover:text-light;
+  }
+  .ring-offset-surface {
+    --tw-ring-offset-color: theme(colors.surface);
   }
 }
