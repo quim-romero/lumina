@@ -1,35 +1,22 @@
-import { loadStripe } from "@stripe/stripe-js";
+import type { Stripe } from "@stripe/stripe-js";
 
-export const stripePromise = loadStripe(
-  import.meta.env.VITE_STRIPE_PUBLIC_KEY as string,
-);
+let stripePromise: Promise<Stripe> | null = null;
 
-export type CheckoutItem = {
-  stripePriceId: string;
-  quantity: number;
-};
-
-export async function redirectToCheckout(items: CheckoutItem[]) {
-  const stripe = await stripePromise;
-
-  if (!stripe) {
-    console.error("Stripe failed to load.");
-    return;
+export async function getStripe(): Promise<Stripe> {
+  if (!stripePromise) {
+    stripePromise = (async () => {
+      const { loadStripe } = await import("@stripe/stripe-js");
+      const pk = import.meta.env.VITE_STRIPE_PK!;
+      const s = await loadStripe(pk);
+      if (!s) throw new Error("Stripe failed to initialize");
+      return s;
+    })();
   }
+  return stripePromise;
+}
 
-  const lineItems = items.map((item) => ({
-    price: item.stripePriceId,
-    quantity: item.quantity,
-  }));
-
-  try {
-    await stripe.redirectToCheckout({
-      mode: "payment",
-      lineItems,
-      successUrl: `${window.location.origin}/success`,
-      cancelUrl: `${window.location.origin}/cancel`,
-    });
-  } catch (error) {
-    console.error("Stripe redirection error:", error);
-  }
+export async function redirectToCheckout(sessionId: string) {
+  const stripe = await getStripe();
+  const { error } = await stripe.redirectToCheckout({ sessionId });
+  if (error) throw error;
 }

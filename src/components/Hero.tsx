@@ -11,17 +11,22 @@ export default function Hero() {
         aria-hidden
       />
 
-      <motion.h1
-        className="text-5xl md:text-7xl font-display font-bold leading-tight max-w-4xl z-10"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-      >
+      <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight max-w-4xl z-10">
         Everyday Products <br /> built with{" "}
-        <span className="underline decoration-brand decoration-4 underline-offset-4">
-          Design
+        <span className="relative inline-block">
+          <span className="underline decoration-brand decoration-4 underline-offset-4">
+            Design
+          </span>
+          <motion.span
+            aria-hidden="true"
+            className="absolute left-0 right-0 -bottom-1 h-1 bg-brand"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{ transformOrigin: "left" }}
+          />
         </span>
-      </motion.h1>
+      </h1>
 
       <motion.p
         className="mt-6 text-lg md:text-xl max-w-xl text-muted z-10"

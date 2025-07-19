@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta name="color-scheme" content="light dark" />
-
     <meta
       name="theme-color"
       content="#F9F5EC"
@@ -19,7 +18,6 @@
 
     <meta name="description" content="Lumina — tienda de productos digitales" />
     <meta name="robots" content="index,follow" />
-
     <title>Lumina</title>
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -27,12 +25,28 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <!-- Preload -->
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap"
+      />
+    </noscript>
 
     <script>
       (function () {
@@ -40,13 +54,11 @@
           var root = document.documentElement;
           root.classList.remove("no-js");
           root.classList.add("js");
-
           var stored = localStorage.getItem("theme");
           var prefersDark = window.matchMedia(
             "(prefers-color-scheme: dark)",
           ).matches;
           var isDark = stored ? stored === "dark" : prefersDark;
-
           root.classList.toggle("dark", isDark);
           root.style.colorScheme = isDark ? "dark" : "light";
         } catch (e) {}
@@ -75,7 +87,6 @@
 
   <body class="bg-light text-dark dark:bg-dark dark:text-light antialiased">
     <a href="#main" class="skip-link">Skip to content</a>
-
     <div id="root"></div>
 
     <noscript>
