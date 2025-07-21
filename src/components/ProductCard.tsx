@@ -8,6 +8,11 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   const titleId = `product-${product.id}-title`;
+  const imgUrl = product.image;
+  const dot = imgUrl.lastIndexOf(".");
+  const base = dot !== -1 ? imgUrl.slice(0, dot) : imgUrl;
+  const avif = `${base}.avif`;
+  const webp = `${base}.webp`;
 
   return (
     <motion.div
@@ -17,13 +22,20 @@ export default function ProductCard({ product }: Props) {
       whileHover={{ scale: 1.015 }}
       whileTap={{ scale: 0.98 }}
     >
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-48 object-cover"
-        loading="lazy"
-        decoding="async"
-      />
+      <picture>
+        <source srcSet={avif} type="image/avif" />
+        <source srcSet={webp} type="image/webp" />
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 object-cover"
+          width={800}
+          height={384}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      </picture>
 
       <div className="p-4 flex flex-col gap-2">
         <h3

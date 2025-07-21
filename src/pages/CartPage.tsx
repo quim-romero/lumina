@@ -11,14 +11,32 @@ export default function CartPage() {
     0,
   );
 
-  const handleCheckout = () => {
-    if (items.length > 0) {
-      redirectToCheckout(
-        items.map((item) => ({
-          stripePriceId: item.stripePriceId,
-          quantity: item.quantity,
-        })),
-      );
+  const handleCheckout = async () => {
+    if (!items.length) return;
+
+    const lineItems = items.map((item) => ({
+      price: item.stripePriceId,
+      quantity: item.quantity,
+    }));
+
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lineItems }),
+      });
+
+      if (!res.ok) {
+        const msg = await res.text().catch(() => "");
+        throw new Error(
+          `Failed to create session: ${res.status} ${msg}`.trim(),
+        );
+      }
+
+      const { sessionId } = (await res.json()) as { sessionId: string };
+      await redirectToCheckout(sessionId);
+    } catch (err) {
+      console.error(err);
     }
   };
 

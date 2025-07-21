@@ -60,28 +60,39 @@ h3,
   .dark .text-brand {
     color: #eab308 !important;
   }
+
   .bg-brand,
   .bg-brand-dark {
     color: #1c1917 !important;
   }
+
   .bg-brand :is(.text-white, .text-light),
   .bg-brand-dark :is(.text-white, .text-light) {
     color: #1c1917 !important;
   }
+
   .bg-brand svg,
   .bg-brand-dark svg {
     fill: #1c1917 !important;
     stroke: #1c1917 !important;
   }
+
   .badge-brand,
   .chip-brand {
     @apply bg-brand;
     color: #1c1917 !important;
   }
+
   .link-muted {
     @apply underline decoration-current underline-offset-4 text-muted hover:text-dark dark:hover:text-light;
   }
+
   .ring-offset-surface {
     --tw-ring-offset-color: theme(colors.surface);
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
   }
 }

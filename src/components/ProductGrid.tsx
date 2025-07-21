@@ -8,7 +8,7 @@ export default function ProductGrid() {
   return (
     <section
       id="products"
-      className="py-24 bg-light dark:bg-dark"
+      className="content-auto py-24 bg-light dark:bg-dark"
       role="region"
       aria-labelledby="products-heading"
     >
