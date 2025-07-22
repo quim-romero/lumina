@@ -11,6 +11,7 @@
 **LUMINA** is more than a landing page — it’s a fully functional **e-commerce experience** for digital products, built as if launching tomorrow.
 
 Designed with precision, care, and clarity in mind, it features:
+
 - 🎨 Immersive hero with motion and scroll-based animations
 - 🛍️ Interactive product grid with hover effects and route transitions
 - 💳 Functional Stripe Checkout (test mode)
@@ -42,18 +43,18 @@ Designed with precision, care, and clarity in mind, it features:
 
 ## 🧠 Tech Stack
 
-| Tech                     | Role                              |
-|--------------------------|-----------------------------------|
-| **React + TypeScript**   | Core framework                    |
-| **Vite**                 | Build tool                        |
-| **Tailwind CSS**         | Utility-first design system       |
-| **Framer Motion**        | Animations + transitions          |
-| **GSAP**                 | Scroll-based effects (planned)    |
-| **Zustand**              | State management (optional scope) |
-| **React Hook Form + Zod**| Form logic + validation           |
-| **EmailJS**              | Contact form email integration    |
-| **Stripe.js**            | Payment checkout (test mode)      |
-| **React Router DOM**     | Page routing                      |
+| Tech                      | Role                              |
+| ------------------------- | --------------------------------- |
+| **React + TypeScript**    | Core framework                    |
+| **Vite**                  | Build tool                        |
+| **Tailwind CSS**          | Utility-first design system       |
+| **Framer Motion**         | Animations + transitions          |
+| **GSAP**                  | Scroll-based effects (planned)    |
+| **Zustand**               | State management (optional scope) |
+| **React Hook Form + Zod** | Form logic + validation           |
+| **EmailJS**               | Contact form email integration    |
+| **Stripe.js**             | Payment checkout (test mode)      |
+| **React Router DOM**      | Page routing                      |
 
 ---
 
@@ -69,23 +70,46 @@ Designed with precision, care, and clarity in mind, it features:
 - `public/` – HTML entry point, fonts, favicon
 - `.env` – (optional) Stripe + EmailJS keys
 
+## 🧪 End-to-End Testing
+
+Lumina uses **Cypress** for reliable E2E testing, with each PR and every push to `main` triggering checks via **GitHub Actions**.
+
+**Currently tested:**
+
+- ✅ Landing page (`/`) → basic render & navigation to product detail
+- ✅ Product detail page → route works from landing
+- ✅ Accessibility audits (Axe) on **Landing** and **Product** (fail on _critical/serious_)
+- ✅ Home form validation with empty fields
+
+**Coming soon:**
+
+- 🛒 Checkout redirect flow (Stripe session → `redirectToCheckout`)
+- 🖼️ Image fallbacks (AVIF/WebP/PNG) smoke checks
+- ⚙️ Theme persistence (light/dark) and focus rings
+- 🧭 Grid lazy-load behavior (IntersectionObserver + Suspense)
+- ♿ Expanded accessibility coverage beyond critical/serious
+
+🧪 **CI status:** [View on GitHub Actions →](https://github.com/quim-romero/lumina/actions)
+
 ---
 
-## 🧪 Interactions & Motion
+## ♿ Accessibility & ⚡ Performance
 
-LUMINA focuses on **interface quality**, not just code:
-- 🌀 Smooth scroll with scroll-triggered reveal animations
-- 🔄 Hero section and products fade in naturally
-- ⚡ Microinteractions on buttons, hovers, and route transitions
-- ⌨️ Focus-visible states and keyboard-friendly navigation
-- 📱 Fully responsive with mobile-first layout
+- **Accessibility:** automatic checks with `cypress-axe` (CI fails on **critical**/**serious** violations for key pages).
+- **Performance:** Lighthouse (LHCI) runs against the production build.  
+  _Goal: keep FCP/LCP in the green on the homepage._
+
+![Lighthouse](./public/lighthouse.png)
+
+> Generate locally with: npm run build && npm run lh:report  
+> Reports are saved to ./lhci/.
 
 ---
 
 ## 📸 Screenshots
 
-| Hero | Products | Product Detail |
-|------|----------|----------------|
+| Hero                            | Products                        | Product Detail                      |
+| ------------------------------- | ------------------------------- | ----------------------------------- |
 | ![Hero](./screenshots/hero.png) | ![Grid](./screenshots/grid.png) | ![Detail](./screenshots/detail.png) |
 
 ---
@@ -103,7 +127,7 @@ LUMINA focuses on **interface quality**, not just code:
 
 Looking to hire a frontend developer who builds **real product experiences** with precision?
 
-- 📧 quim@quimromero.com  
+- 📧 quim@quimromero.com
 - 🌐 [https://quimromero.com](https://quimromero.com)
 
 ---
