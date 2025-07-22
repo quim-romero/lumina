@@ -6,9 +6,11 @@ import type { ContactFormData } from "../lib/contactSchema";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as
+  | string
+  | undefined;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
 
 export default function ContactForm() {
   const {
@@ -16,9 +18,7 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
+  } = useForm<ContactFormData>({ resolver: zodResolver(contactSchema) });
 
   const [success, setSuccess] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
@@ -27,23 +27,28 @@ export default function ContactForm() {
     setSuccess(false);
     setSendError(null);
 
-    if (!serviceId || !templateId || !publicKey) {
-      console.error("EmailJS environment variables are missing.");
-      setSendError("Configuration error. Please try again later.");
+    const missing: string[] = [];
+    if (!serviceId) missing.push("VITE_EMAILJS_SERVICE_ID");
+    if (!templateId) missing.push("VITE_EMAILJS_TEMPLATE_ID");
+    if (!publicKey) missing.push("VITE_EMAILJS_PUBLIC_KEY");
+    if (missing.length) {
+      console.error("Missing EmailJS env:", missing.join(", "));
+      setSendError(`Configuration error: ${missing.join(", ")}.`);
       return;
     }
 
     try {
       await emailjs.send(
-        serviceId,
-        templateId,
+        serviceId!,
+        templateId!,
         {
           from_name: data.name,
           reply_to: data.email,
           message: data.message,
         },
-        publicKey,
+        { publicKey },
       );
+
       setSuccess(true);
       reset();
     } catch (error) {
