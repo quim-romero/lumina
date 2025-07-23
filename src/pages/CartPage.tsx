@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCartStore } from "../store/useCartStore";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { redirectToCheckout } from "../lib/checkout";
 
 export default function CartPage() {
   const { items, removeItem, increase, decrease, clearCart } = useCartStore();
+  const [errMsg, setErrMsg] = useState<string | null>(null);
 
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -12,33 +14,34 @@ export default function CartPage() {
   );
 
   const handleCheckout = async () => {
+    setErrMsg(null);
     if (!items.length) return;
 
-    const lineItems = items.map((item) => ({
-      price: item.stripePriceId,
-      quantity: item.quantity,
-    }));
+    const allHavePriceIds = items.every((it) => !!it.stripePriceId);
+    if (!allHavePriceIds) {
+      setErrMsg(
+        "Some items are missing stripePriceId. Please check your price IDs.",
+      );
+      return;
+    }
 
     try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lineItems }),
-      });
+      const lineItems = items.map((it) => ({
+        price: it.stripePriceId!,
+        quantity: it.quantity,
+      }));
 
-      if (!res.ok) {
-        const msg = await res.text().catch(() => "");
-        throw new Error(
-          `Failed to create session: ${res.status} ${msg}`.trim(),
-        );
-      }
-
-      const { sessionId } = (await res.json()) as { sessionId: string };
-      await redirectToCheckout(sessionId);
+      await redirectToCheckout({ lineItems });
     } catch (err) {
       console.error(err);
+      setErrMsg(
+        "We couldn't redirect to checkout. Please check your price IDs and try again.",
+      );
     }
   };
+
+  const allHavePriceIds = items.every((it) => !!it.stripePriceId);
+  const canCheckout = items.length > 0 && allHavePriceIds;
 
   return (
     <motion.section
@@ -128,11 +131,30 @@ export default function CartPage() {
 
           <div className="mt-8">
             <button
+              type="button"
               onClick={handleCheckout}
-              className="px-6 py-3 bg-brand text-dark rounded-full font-medium hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2"
+              disabled={!canCheckout}
+              aria-disabled={!canCheckout}
+              className={`px-6 py-3 rounded-full font-medium transition focus:outline-none focus-visible:ring-2 ring-brand ring-offset-2
+                ${
+                  canCheckout
+                    ? "bg-brand text-dark hover:bg-brand-dark"
+                    : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                }`}
             >
               Proceed to Checkout
             </button>
+
+            {!allHavePriceIds && (
+              <p className="text-amber-600 mt-2 text-sm">
+                Some cart items are missing <code>stripePriceId</code>.
+              </p>
+            )}
+            {errMsg && (
+              <p role="alert" className="text-red-600 mt-2 text-sm">
+                {errMsg}
+              </p>
+            )}
           </div>
 
           <div className="mt-4">
