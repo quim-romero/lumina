@@ -10,12 +10,12 @@
 
 **LUMINA** is more than a landing page — it’s a fully functional **e-commerce experience** for digital products, built as if launching tomorrow.
 
-Designed with precision, care, and clarity in mind, it features:
+Designed with precision and clarity, it features:
 
-- 🎨 Immersive hero with motion and scroll-based animations
-- 🛍️ Interactive product grid with hover effects and route transitions
-- 💳 Functional Stripe Checkout (test mode)
-- ✉️ Contact form with real-time validation and EmailJS integration
+- 🎨 Immersive hero with motion and scroll-based animations  
+- 🛍️ Interactive product grid with hover effects and route transitions  
+- 💳 Functional **Stripe Checkout** (test mode)  
+- ✉️ Contact form with real-time validation and **EmailJS**  
 - 🌗 Light/dark mode with system preference + persistence
 
 > Built to showcase real frontend capabilities — not mockups.
@@ -24,85 +24,96 @@ Designed with precision, care, and clarity in mind, it features:
 
 ## 🚀 Live Preview
 
-👉 [https://lumina.quimromero.com](https://lumina.quimromero.com)
+👉 https://lumina.quimromero.com
 
 ---
 
 ## ✨ Features
 
-- ⚡ Scroll-based animations using Framer Motion
+- ⚡ Framer Motion for smooth, scroll-aware animation
 - 🎯 Fully responsive layout with keyboard accessibility
 - 🛍️ Product detail routes with animated transitions
 - 💸 Stripe Checkout (test mode, frontend-only)
-- 📩 Validated contact form with Zod + EmailJS
-- 🌓 Dark/light mode toggle with smooth transitions
-- 🧼 Clean, scalable architecture built with intention
-- 🎬 Page transitions, fade-ins, button feedback, and loader screen
+- 📩 Validated contact form with **Zod** + **React Hook Form** + EmailJS
+- 🌓 Dark/Light mode toggle with smooth transitions
+- 🧼 Clean, scalable architecture focused on real product UX
+- 🎬 Page transitions, subtle feedback, and a loader screen
 
 ---
 
 ## 🧠 Tech Stack
 
-| Tech                      | Role                              |
-| ------------------------- | --------------------------------- |
-| **React + TypeScript**    | Core framework                    |
-| **Vite**                  | Build tool                        |
-| **Tailwind CSS**          | Utility-first design system       |
-| **Framer Motion**         | Animations + transitions          |
-| **GSAP**                  | Scroll-based effects (planned)    |
-| **Zustand**               | State management (optional scope) |
-| **React Hook Form + Zod** | Form logic + validation           |
-| **EmailJS**               | Contact form email integration    |
-| **Stripe.js**             | Payment checkout (test mode)      |
-| **React Router DOM**      | Page routing                      |
+| Tech                      | Role                            |
+| ------------------------- | ------------------------------- |
+| **React + TypeScript**    | Core framework                  |
+| **Vite**                  | Build tool                      |
+| **Tailwind CSS**          | Utility-first design system     |
+| **Framer Motion**         | Animations & transitions        |
+| **Zustand**               | State management (scoped)       |
+| **React Hook Form + Zod** | Form logic & schema validation  |
+| **EmailJS**               | Contact form email delivery     |
+| **Stripe.js**             | Payment checkout (test mode)    |
+| **React Router DOM**      | Routing                         |
 
 ---
 
 ## 🗂 Project Structure
 
-- `src/`
-  - `components/` – UI blocks (Navbar, Hero, ProductCard, etc.)
-  - `hooks/` – Custom hooks (smooth scroll, scroll-top reset)
-  - `lib/` – Product data, validation schemas, checkout utils
-  - `styles/` – Global Tailwind CSS config
-  - `assets/` – Mock product images
-  - `App.tsx` – Main routes + layout composition
-- `public/` – HTML entry point, fonts, favicon
+- `src/`  
+  - `components/` – UI blocks (Navbar, Hero, ProductCard, etc.)  
+  - `hooks/` – Smooth scroll, scroll-to-top  
+  - `lib/` – Product data, validation schemas, checkout utils  
+  - `styles/` – Global Tailwind config  
+  - `assets/` – Mock product images  
+  - `App.tsx` – Main routes + layout composition  
+- `public/` – HTML entry point, fonts, favicon  
 - `.env` – (optional) Stripe + EmailJS keys
+
+---
 
 ## 🧪 End-to-End Testing
 
-Lumina uses **Cypress** for reliable E2E testing, with each PR and every push to `main` triggering checks via **GitHub Actions**.
+Lumina uses **Cypress** for reliable E2E testing on each PR and every push to `main` (via **GitHub Actions**).
 
-**Currently tested:**
+**Currently tested**
 
-- ✅ Landing page (`/`) → basic render & navigation to product detail
-- ✅ Product detail page → route works from landing
-- ✅ Accessibility audits (Axe) on **Landing** and **Product** (fail on _critical/serious_)
-- ✅ Home form validation with empty fields
+- ✅ Landing (`/`) → basic render & navigation to product detail  
+- ✅ Product detail page → route works from landing  
+- ✅ **Accessibility audits** (axe) on **Landing** and **Product** (CI fails on _serious/critical_)  
+- ✅ Contact form validation (empty state)
 
-**Coming soon:**
+**Coming soon**
 
-- 🛒 Checkout redirect flow (Stripe session → `redirectToCheckout`)
-- 🖼️ Image fallbacks (AVIF/WebP/PNG) smoke checks
-- ⚙️ Theme persistence (light/dark) and focus rings
-- 🧭 Grid lazy-load behavior (IntersectionObserver + Suspense)
-- ♿ Expanded accessibility coverage beyond critical/serious
+- 🛒 Checkout redirect smoke (Stripe session → `redirectToCheckout`)  
+- 🖼️ Image fallbacks (AVIF/WebP/PNG)  
+- ⚙️ Theme persistence refinements and focus rings  
+- 🧭 Grid lazy-load (IntersectionObserver + Suspense)  
+- ♿ Expanded a11y coverage beyond serious/critical
 
-🧪 **CI status:** [View on GitHub Actions →](https://github.com/quim-romero/lumina/actions)
+🧪 **CI status:** https://github.com/quim-romero/lumina/actions
 
 ---
 
 ## ♿ Accessibility & ⚡ Performance
 
-- **Accessibility:** automatic checks with `cypress-axe` (CI fails on **critical**/**serious** violations for key pages).
-- **Performance:** Lighthouse (LHCI) runs against the production build.  
+**Accessibility**
+
+- Automated checks with `cypress-axe` on key pages; CI **fails** on serious/critical issues.
+
+**Performance**
+
+- Lighthouse (LHCI) runs against the production build.  
   _Goal: keep FCP/LCP in the green on the homepage._
 
 ![Lighthouse](./public/lighthouse.png)
 
-> Generate locally with: npm run build && npm run lh:report  
-> Reports are saved to ./lhci/.
+Generate locally:
+
+```bash
+npm run build && npm run lh:report
+```
+
+Reports are saved to `./lhci/`.
 
 ---
 
@@ -116,9 +127,9 @@ Lumina uses **Cypress** for reliable E2E testing, with each PR and every push to
 
 ## 🧩 Notes
 
-- 🧠 All code is handcrafted — no UI kits, no templates
-- 🔍 Typography and motion tuned for clarity and presence
-- 💡 Uses real data flow, payment redirect, and form validation
+- 🧠 All code is handcrafted — no UI kits, no templates  
+- 🔍 Typography and motion tuned for clarity and presence  
+- 💡 Real data flow, payment redirect, and form validation  
 - 🎯 Built as a **freelance portfolio project**, ready for presentation
 
 ---
@@ -127,10 +138,9 @@ Lumina uses **Cypress** for reliable E2E testing, with each PR and every push to
 
 Looking to hire a frontend developer who builds **real product experiences** with precision?
 
-- 📧 quim@quimromero.com
-- 🌐 [https://quimromero.com](https://quimromero.com)
+- 📧 quim@quimromero.com  
+- 🌐 https://quimromero.com
 
 ---
 
-> _LUMINA is frontend done with soul —  
-> built for users who feel design, not just see it._
+> _LUMINA is frontend done with soul — built for users who feel design, not just see it._
